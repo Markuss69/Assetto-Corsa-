@@ -1,45 +1,71 @@
 /* ---------- Pamatstils ---------- */
 :root {
-    --blue: #007bff;
-    --blue-dark: #0056b3;
+    --blue: #3399ff;
+    --blue-dark: #267acc;
+    --gray-light: #f0f2f5;
+    --gray-medium: #8a8f9b;
+    --red: #ff4c4c;
+    --red-dark: #cc3a3a;
+    --shadow-light: rgba(0, 0, 0, 0.06);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f9;
-    color: #333;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--gray-light);
+    color: #2e2e2e;
     margin: 0;
-    padding: 20px;
+    padding: 24px 36px;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 nav {
-    margin-bottom: 20px;
+    margin-bottom: 28px;
 }
 
 .nav-btn {
     background: var(--blue);
     color: #fff;
     border: none;
-    padding: 10px 25px;
-    border-radius: 6px;
+    padding: 14px 34px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    box-shadow: 0 6px 16px var(--shadow-light);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    letter-spacing: 0.03em;
 }
 
-.nav-btn:hover {
+.nav-btn:hover,
+.nav-btn:focus {
     background: var(--blue-dark);
+    box-shadow: 0 8px 22px var(--shadow-medium);
+    outline: none;
 }
 
 .card {
     background: #fff;
-    padding: 20px;
-    margin-bottom: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    padding: 28px 36px;
+    margin-bottom: 34px;
+    border-radius: 16px;
+    box-shadow: 0 10px 32px var(--shadow-light);
+    transition: box-shadow 0.35s ease;
+}
+
+.card:hover {
+    box-shadow: 0 14px 38px var(--shadow-medium);
 }
 
 h2 {
     margin-top: 0;
+    font-weight: 600;
+    color: #1f2937;
+    letter-spacing: 0.02em;
 }
 
 /* ---------- Formas & pogas ---------- */
@@ -47,12 +73,24 @@ input,
 select,
 button {
     width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 16px;
+    padding: 14px 18px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1.5px solid #c8cbd6;
+    border-radius: 10px;
     box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+    color: #3a3f51;
+    font-weight: 300;
+}
+
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 8px var(--blue);
 }
 
 button {
@@ -60,53 +98,104 @@ button {
     color: #fff;
     border: none;
     cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 6px 18px var(--shadow-light);
+    transition: background-color 0.35s ease, box-shadow 0.35s ease;
+    user-select: none;
+    letter-spacing: 0.03em;
 }
 
-button:hover {
+button:hover,
+button:focus {
     background: var(--blue-dark);
+    box-shadow: 0 8px 24px var(--shadow-medium);
+    outline: none;
 }
 
 /* ---------- Tabulas ---------- */
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-top: 16px;
+    background: transparent;
 }
 
 th,
 td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 16px 20px;
     text-align: left;
+    font-weight: 400;
+    color: #3a3f51;
 }
 
 th {
-    background: #f2f2f2;
+    background: #e3e8f1;
     cursor: pointer;
+    user-select: none;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    transition: background-color 0.25s ease;
+}
+
+th:hover {
+    background-color: #c4d0e8;
+}
+
+/* Tabulas rindas ar “kartīšu” efektu */
+tbody tr {
+    background: #fff;
+    box-shadow: 0 3px 10px var(--shadow-light);
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+}
+
+tbody tr:hover {
+    box-shadow: 0 7px 18px var(--shadow-medium);
 }
 
 .filters input {
     border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 6px;
-    font-size: 0.9rem;
+    border-bottom: 2px solid #b1b6c4;
+    padding: 8px 6px;
+    font-size: 0.95rem;
+    color: #5a5f75;
+    font-weight: 300;
+    transition: border-color 0.3s ease;
 }
 
-@media (min-width: 600px) {
-    nav { text-align: right; }
+.filters input:focus {
+    outline: none;
+    border-color: var(--blue);
 }
+
+/* ---------- Delete pogas ---------- */
 button.del-auto,
 button.del-lap {
-  background-color: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: red;
-  transition: transform 0.2s ease;
+    background-color: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--red);
+    transition: transform 0.22s ease, color 0.22s ease, background-color 0.22s ease;
+    padding: 6px 8px;
+    border-radius: 6px;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 button.del-auto:hover,
 button.del-lap:hover {
-  transform: scale(1.2);
-  color: darkred;
+    transform: scale(1.25);
+    color: var(--red-dark);
+    background-color: rgba(255, 76, 76, 0.12);
+}
+
+/* Responsīvais izkārtojums */
+@media (min-width: 600px) {
+    nav {
+        text-align: right;
+    }
 }
