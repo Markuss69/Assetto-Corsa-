@@ -95,3 +95,18 @@ th {
 @media (min-width: 600px) {
     nav { text-align: right; }
 }
+button.del-auto,
+button.del-lap {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: red;
+  transition: transform 0.2s ease;
+}
+
+button.del-auto:hover,
+button.del-lap:hover {
+  transform: scale(1.2);
+  color: darkred;
+}

@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assetto Corsa – Laiku rekordi</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assetto Corsa – Laiku rekordi</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body data-page="laps">
-    <nav>
-        <button class="nav-btn" onclick="location.href='index.html'">🚗 Auto saraksts</button>
-    </nav>
+  <nav>
+    <button class="nav-btn" onclick="location.href='index.html'">🚗 Auto saraksts</button>
+  </nav>
 
-    <main id="app">
-        <!-- ========= Laika pievienošana ========= -->
-        <section class="card">
-            <h2>Pievienot jaunu apli</h2>
-            <form id="lap-form">
-                <select id="auto-select" required></select>
-                <select id="trase-select" required></select>
-                <input id="vards" placeholder="Braucēja vārds" required />
-                <input id="laiks" placeholder="Laiks (mm:ss.sss)" required />
-                <button type="submit">Pievienot laiku</button>
-            </form>
-        </section>
+  <h2>Pievienot jaunu trasi</h2>
+  <form id="trase-form">
+    <input type="text" name="nosaukums" placeholder="Trases nosaukums" required>
+    <button type="submit">Pievienot trasi</button>
+  </form>
 
-        <!-- ========= Laiku tabula ========= -->
-        <section class="card">
-            <h2>Trašu laiku tabula</h2>
-            <table id="lap-table">
-                <thead>
-                    <tr>
-                        <th data-key="Auto">Auto (firma + modelis)</th>
-                        <th data-key="Piedzina">Piedziņa</th>
-                        <th data-key="Trase">Trase</th>
-                        <th data-key="Laiks_ms">Laiks</th>
-                        <th data-key="Datums">Datums</th>
-                        <th data-key="Brauceja_vards">Braucējs</th>
-                    </tr>
-                    <tr class="filters">
-                        <th><input data-col="0" /></th>
-                        <th><input data-col="1" /></th>
-                        <th><input data-col="2" /></th>
-                        <th><input data-col="3" /></th>
-                        <th><input data-col="4" /></th>
-                        <th><input data-col="5" /></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </section>
-    </main>
+  <main id="app">
+    <section class="card">
+      <h2>Pievienot jaunu apli</h2>
+      <form id="lap-form">
+        <select id="auto-select" required></select>
+        <select id="trase-select" required></select>
+        <input id="vards" placeholder="Braucēja vārds" required />
+        <input id="laiks" placeholder="Laiks (mm:ss.sss)" required />
+        <button type="submit">Pievienot laiku</button>
+      </form>
+    </section>
 
-    <script src="script.js"></script>
+    <section class="card">
+      <h2>Trašu laiku tabula</h2>
+      <table id="lap-table">
+        <thead>
+          <tr>
+            <th data-key="Auto">Auto (firma + modelis)</th>
+            <th data-key="Piedzina">Piedziņa</th>
+            <th data-key="Trase">Trase</th>
+            <th data-key="Laiks_ms">Laiks</th>
+            <th data-key="Datums">Datums</th>
+            <th data-key="Brauceja_vards">Braucējs</th>
+            <th>Dzēst</th>
+          </tr>
+          <tr class="filters">
+            <th><input data-col="0" /></th><th><input data-col="1" /></th>
+            <th><input data-col="2" /></th><th><input data-col="3" /></th>
+            <th><input data-col="4" /></th><th><input data-col="5" /></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
