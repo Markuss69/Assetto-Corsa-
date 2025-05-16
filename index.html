@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assetto Corsa – Auto saraksts</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="auto">
+    <nav>
+        <button class="nav-btn" onclick="location.href='laps.html'">⏱ Laiku rekordi</button>
+    </nav>
+
+    <main id="app">
+        <!-- ========= Auto pievienošana ========= -->
+        <section class="card">
+            <h2>Pievienot auto</h2>
+            <form id="car-form">
+                <input id="firma"        placeholder="Firma"        required />
+                <input id="modelis"      placeholder="Modelis"      required />
+                <input id="modelaGads"   placeholder="Modeļa gads (neobligāti)" />
+                <input id="piedzina"     placeholder="Piedziņa"     required />
+                <input id="svarsKg"      placeholder="Svars (kg)"   required />
+                <input id="jaudaZs"      placeholder="Jauda (zs)"   required />
+                <button type="submit">Pievienot auto</button>
+            </form>
+        </section>
+
+        <!-- ========= Auto tabula ========= -->
+        <section class="card">
+            <h2>Auto tabula</h2>
+            <table id="auto-table">
+                <thead>
+                    <tr>
+                        <th data-key="Firma">Firma</th>
+                        <th data-key="Modelis">Modelis</th>
+                        <th data-key="Modela_gads">Gads</th>
+                        <th data-key="Piedzina">Piedziņa</th>
+                        <th data-key="Svars_kg">Svars (kg)</th>
+                        <th data-key="Jauda_zs">Jauda (zs)</th>
+                    </tr>
+                    <tr class="filters">
+                        <th><input data-col="0" /></th>
+                        <th><input data-col="1" /></th>
+                        <th><input data-col="2" /></th>
+                        <th><input data-col="3" /></th>
+                        <th><input data-col="4" /></th>
+                        <th><input data-col="5" /></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
