@@ -12,30 +12,13 @@
     <button class="nav-btn" onclick="location.href='index.html'">🚗 Auto saraksts</button>
   </nav>
 
-  <h2>Pievienot jaunu trasi</h2>
-  <form id="trase-form">
-    <input type="text" name="nosaukums" placeholder="Trases nosaukums" required>
-    <button type="submit">Pievienot trasi</button>
-  </form>
-
   <main id="app">
-    <section class="card">
-      <h2>Pievienot jaunu apli</h2>
-      <form id="lap-form">
-        <select id="auto-select" required></select>
-        <select id="trase-select" required></select>
-        <input id="vards" placeholder="Braucēja vārds" required />
-        <input id="laiks" placeholder="Laiks (mm:ss.sss)" required />
-        <button type="submit">Pievienot laiku</button>
-      </form>
-    </section>
-
     <section class="card">
       <h2>Trašu laiku tabula</h2>
       <table id="lap-table">
         <thead>
           <tr>
-            <th data-key="Auto">Auto (firma + modelis)</th>
+            <th data-key="Auto">Auto</th>
             <th data-key="Piedzina">Piedziņa</th>
             <th data-key="Trase">Trase</th>
             <th data-key="Laiks_ms">Laiks</th>
@@ -52,6 +35,25 @@
         </thead>
         <tbody></tbody>
       </table>
+    </section>
+
+    <section class="card">
+      <h2>Pievienot jaunu apli</h2>
+      <form id="lap-form">
+        <select id="auto-select" required></select>
+        <select id="trase-select" required></select>
+        <input id="vards" placeholder="Braucēja vārds" required />
+        <input id="laiks" placeholder="Laiks (mm:ss.sss)" required />
+        <button type="submit">Pievienot laiku</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Pievienot jaunu trasi</h2>
+      <form id="trase-form">
+        <input type="text" name="nosaukums" placeholder="Trases nosaukums" required>
+        <button type="submit">Pievienot trasi</button>
+      </form>
     </section>
   </main>
 
