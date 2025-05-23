@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+.env
+.env.*
+dist/
+build/
+coverage/
+.DS_Store
+*.local
+*.sublime-workspace
+*.sublime-project
+.idea/
+.vscode/
+*.tgz
+.nyc_output/
+.cache/
+tmp/
+temp/
+logs/
+*.log
+*.tsbuildinfo
+*.swp
+*.swo
+*.bak
+*.orig
+*.rej
+# Optional: OS-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
