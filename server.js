@@ -1,16 +1,16 @@
-const express   = require("express");
-const sqlite3   = require("sqlite3").verbose();
-const bodyParser= require("body-parser");
-const cors      = require("cors");
-const path      = require("path");
+const express = require("express");
+const sqlite3 = require("sqlite3").verbose();
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const path = require("path");
 
-const app   = express();
-const PORT  = 3000;
-const DB    = "./racelibrary.db";
+const app = express();
+const PORT = 4001;
+const DB = "./racelibrary.db";
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname))); // Serve static files (HTML, CSS, JS)
 
 const db = new sqlite3.Database(DB, (err) => {
   if (err) console.error(err.message);
@@ -102,7 +102,8 @@ app.post("/api/auto", (req, res) => {
 
 app.post("/api/trases", (req, res) => {
   const { nosaukums } = req.body;
-  if (!nosaukums) return res.status(400).send("Trases nosaukums ir jāaizpilda!");
+  if (!nosaukums)
+    return res.status(400).send("Trases nosaukums ir jāaizpilda!");
 
   db.run("INSERT INTO Trases(Nosaukums) VALUES(?)", [nosaukums], (e) =>
     e ? res.status(500).send(e.message) : res.sendStatus(201)
@@ -115,7 +116,8 @@ app.post("/api/laiki", (req, res) => {
     return res.status(400).send("Visi lauki ir obligāti!");
 
   const parts = laiks.split(":");
-  if (parts.length !== 2) return res.status(400).send("Nepareizs laika formāts!");
+  if (parts.length !== 2)
+    return res.status(400).send("Nepareizs laika formāts!");
 
   const laiksMs = Math.round((+parts[0] * 60 + +parts[1]) * 1000);
   if (isNaN(laiksMs)) return res.status(400).send("Nepareizs laiks!");
@@ -129,13 +131,17 @@ app.post("/api/laiki", (req, res) => {
 
 app.delete("/api/auto/:id", (req, res) => {
   db.run("DELETE FROM Auto WHERE ID = ?", [req.params.id], function (e) {
-    e ? res.status(500).send(e.message) : res.sendStatus(this.changes ? 204 : 404);
+    e
+      ? res.status(500).send(e.message)
+      : res.sendStatus(this.changes ? 204 : 404);
   });
 });
 
 app.delete("/api/laiki/:id", (req, res) => {
   db.run("DELETE FROM Laiki WHERE ID = ?", [req.params.id], function (e) {
-    e ? res.status(500).send(e.message) : res.sendStatus(this.changes ? 204 : 404);
+    e
+      ? res.status(500).send(e.message)
+      : res.sendStatus(this.changes ? 204 : 404);
   });
 });
 

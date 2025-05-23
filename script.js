@@ -1,13 +1,13 @@
-const API_URL = "http://localhost:3000/api";
+const API_URL = "/api";
 
 // ---------- Palīg-funkcijas ----------
-const qs  = (sel, el = document) => el.querySelector(sel);
+const qs = (sel, el = document) => el.querySelector(sel);
 const qsa = (sel, el = document) => [...el.querySelectorAll(sel)];
 
 const formatMs = (ms) => {
   const totalSeconds = ms / 1000;
-  const minutes      = Math.floor(totalSeconds / 60);
-  const seconds      = (totalSeconds % 60).toFixed(3).padStart(6, "0");
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = (totalSeconds % 60).toFixed(3).padStart(6, "0");
   return `${minutes}:${seconds}`;
 };
 
@@ -21,14 +21,14 @@ const parseTimeToMs = (str) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const page = document.body.dataset.page;
-  if (page === "auto")  await initAutoPage();
-  if (page === "laps")  await initLapPage();
+  if (page === "auto") await initAutoPage();
+  if (page === "laps") await initLapPage();
 });
 
 async function initAutoPage() {
-  const form  = qs("#car-form");
+  const form = qs("#car-form");
   const tbody = qs("#auto-table tbody");
-  let data    = [];
+  let data = [];
 
   async function loadCars() {
     data = await fetch(`${API_URL}/auto`).then((r) => r.json());
@@ -51,12 +51,16 @@ async function initAutoPage() {
       const val = inp.value.trim().toLowerCase();
       if (!val) return;
       rows = rows.filter((row) =>
-        String(row[AUTO_COLS[idx]] ?? "").toLowerCase().includes(val)
+        String(row[AUTO_COLS[idx]] ?? "")
+          .toLowerCase()
+          .includes(val)
       );
     });
 
     if (sortKey) {
-      rows.sort((a, b) => (a[sortKey] > b[sortKey] ? dir : a[sortKey] < b[sortKey] ? -dir : 0));
+      rows.sort((a, b) =>
+        a[sortKey] > b[sortKey] ? dir : a[sortKey] < b[sortKey] ? -dir : 0
+      );
     }
 
     tbody.innerHTML = rows
@@ -68,7 +72,9 @@ async function initAutoPage() {
           <td>${r.Piedzina}</td>
           <td>${r.Svars_kg}</td>
           <td>${r.Jauda_zs}</td>
-          <td><button class="del-auto" data-id="${r.ID}" title="Dzēst auto">🗑️</button></td>
+          <td><button class="del-auto" data-id="${
+            r.ID
+          }" title="Dzēst auto">🗑️</button></td>
         </tr>`
       )
       .join("");
@@ -91,23 +97,27 @@ async function initAutoPage() {
     th.addEventListener("click", () => {
       const key = th.dataset.key;
       const dir = th.dataset.dir === "1" ? -1 : 1;
-      qsa("#auto-table thead th[data-key]").forEach((h) => (h.dataset.dir = ""));
+      qsa("#auto-table thead th[data-key]").forEach(
+        (h) => (h.dataset.dir = "")
+      );
       th.dataset.dir = dir;
       renderTable(key, dir);
     });
   });
 
-  qsa(".filters input").forEach((inp) => inp.addEventListener("input", () => renderTable()));
+  qsa(".filters input").forEach((inp) =>
+    inp.addEventListener("input", () => renderTable())
+  );
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const payload = {
-      firma:      qs("#firma").value.trim(),
-      modelis:    qs("#modelis").value.trim(),
+      firma: qs("#firma").value.trim(),
+      modelis: qs("#modelis").value.trim(),
       modelaGads: qs("#modelaGads").value.trim() || null,
-      piedzina:   qs("#piedzina").value.trim(),
-      svarsKg:    qs("#svarsKg").value.trim(),
-      jaudaZs:    qs("#jaudaZs").value.trim(),
+      piedzina: qs("#piedzina").value.trim(),
+      svarsKg: qs("#svarsKg").value.trim(),
+      jaudaZs: qs("#jaudaZs").value.trim(),
     };
 
     if (!Object.values(payload).every((v) => v || v === null)) {
@@ -134,12 +144,12 @@ async function initAutoPage() {
 }
 
 async function initLapPage() {
-  const lapForm   = qs("#lap-form");
+  const lapForm = qs("#lap-form");
   const trackForm = qs("#trase-form");
-  const tbody     = qs("#lap-table tbody");
-  const autoSel   = qs("#auto-select");
-  const traseSel  = qs("#trase-select");
-  let lapData     = [];
+  const tbody = qs("#lap-table tbody");
+  const autoSel = qs("#auto-select");
+  const traseSel = qs("#trase-select");
+  let lapData = [];
 
   async function loadCombos() {
     const [autos, trases] = await Promise.all([
@@ -147,17 +157,23 @@ async function initLapPage() {
       fetch(`${API_URL}/trases`).then((r) => r.json()),
     ]);
 
-    autoSel.innerHTML  = '<option value="">Izvēlies auto</option>' +
-      autos.map((a) => `<option value="${a.ID}">${a.Firma} ${a.Modelis}</option>`).join("");
+    autoSel.innerHTML =
+      '<option value="">Izvēlies auto</option>' +
+      autos
+        .map((a) => `<option value="${a.ID}">${a.Firma} ${a.Modelis}</option>`)
+        .join("");
 
-    traseSel.innerHTML = '<option value="">Izvēlies trasi</option>' +
-      trases.map((t) => `<option value="${t.ID}">${t.Nosaukums}</option>`).join("");
+    traseSel.innerHTML =
+      '<option value="">Izvēlies trasi</option>' +
+      trases
+        .map((t) => `<option value="${t.ID}">${t.Nosaukums}</option>`)
+        .join("");
   }
 
   trackForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const nosaukumsInput = qs('[name="nosaukums"]', trackForm);
-    const nosaukums      = nosaukumsInput.value.trim();
+    const nosaukums = nosaukumsInput.value.trim();
 
     if (!nosaukums) {
       alert("Ievadi trases nosaukumu!");
@@ -191,30 +207,36 @@ async function initLapPage() {
       const val = inp.value.trim().toLowerCase();
       if (val) {
         rows = rows.filter((row) =>
-          `${[
-            `${row.Firma} ${row.Modelis}`,
-            row.Piedzina,
-            row.Trase,
-            formatMs(row.Laiks_ms),
-            row.Datums,
-            row.Brauceja_vards,
-          ][idx]}`.toLowerCase().includes(val)
+          `${
+            [
+              `${row.Firma} ${row.Modelis}`,
+              row.Piedzina,
+              row.Trase,
+              formatMs(row.Laiks_ms),
+              row.Datums,
+              row.Brauceja_vards,
+            ][idx]
+          }`
+            .toLowerCase()
+            .includes(val)
         );
       }
     });
 
     if (sortKey) {
       rows.sort((a, b) => {
-        const av = sortKey === "Auto"
-          ? `${a.Firma} ${a.Modelis}`
-          : sortKey === "Laiks_ms"
-          ? a.Laiks_ms
-          : a[sortKey];
-        const bv = sortKey === "Auto"
-          ? `${b.Firma} ${b.Modelis}`
-          : sortKey === "Laiks_ms"
-          ? b.Laiks_ms
-          : b[sortKey];
+        const av =
+          sortKey === "Auto"
+            ? `${a.Firma} ${a.Modelis}`
+            : sortKey === "Laiks_ms"
+            ? a.Laiks_ms
+            : a[sortKey];
+        const bv =
+          sortKey === "Auto"
+            ? `${b.Firma} ${b.Modelis}`
+            : sortKey === "Laiks_ms"
+            ? b.Laiks_ms
+            : b[sortKey];
         return av > bv ? dir : av < bv ? -dir : 0;
       });
     }
@@ -228,7 +250,9 @@ async function initLapPage() {
           <td>${formatMs(r.Laiks_ms)}</td>
           <td>${r.Datums}</td>
           <td>${r.Brauceja_vards}</td>
-          <td><button class="del-lap" data-id="${r.ID}" title="Dzēst apli">🗑️</button></td>
+          <td><button class="del-lap" data-id="${
+            r.ID
+          }" title="Dzēst apli">🗑️</button></td>
         </tr>`
       )
       .join("");
@@ -263,10 +287,10 @@ async function initLapPage() {
 
   lapForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const autoId  = autoSel.value;
+    const autoId = autoSel.value;
     const traseId = traseSel.value;
-    const vards   = qs("#vards").value.trim();
-    const laiks   = qs("#laiks").value.trim();
+    const vards = qs("#vards").value.trim();
+    const laiks = qs("#laiks").value.trim();
     const laiksMs = parseTimeToMs(laiks);
 
     if (!autoId || !traseId || !vards || isNaN(laiksMs)) {
